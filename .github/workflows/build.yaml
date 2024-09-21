@@ -30,12 +30,13 @@ jobs:
 
       - name: Build
         run: |
-          echo "docker buildx build --platform linux/amd64,linux/arm64 -t \"${IMAGE_NAME}:latest\" ."
-          docker buildx build --platform linux/amd64,linux/arm64 -t "${IMAGE_NAME}:latest" .
+          echo "docker buildx build --platform linux/amd64,linux/arm64 -t \"${ALIYUN_REGISTRY}/${ALIYUN_NAME_SPACE}/${IMAGE_NAME}:latest\" ."
+          docker build -t ${ALIYUN_REGISTRY}/${ALIYUN_NAME_SPACE}/${IMAGE_NAME}:latest .
+          # docker buildx build --platform linux/amd64,linux/arm64 -t ${ALIYUN_REGISTRY}/${ALIYUN_NAME_SPACE}/${IMAGE_NAME}:latest .
           docker images
 
-      - name: Tag
-        run: docker tag "${IMAGE_NAME}:latest" "${ALIYUN_REGISTRY}/${ALIYUN_NAME_SPACE}/${IMAGE_NAME}:latest"
+      # - name: Tag
+      #   run: docker tag "${IMAGE_NAME}:latest" "${ALIYUN_REGISTRY}/${ALIYUN_NAME_SPACE}/${IMAGE_NAME}:latest"
 
       - name: Push
         run: docker push "${ALIYUN_REGISTRY}/${ALIYUN_NAME_SPACE}/${IMAGE_NAME}:latest"
