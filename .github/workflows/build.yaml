@@ -30,6 +30,7 @@ jobs:
 
       - name: Build
         run: |
+          echo "docker buildx build --platform linux/amd64,linux/arm64 -t \"${IMAGE_NAME}:latest\" ."
           docker buildx build --platform linux/amd64,linux/arm64 -t "${IMAGE_NAME}:latest" .
           docker images
 
