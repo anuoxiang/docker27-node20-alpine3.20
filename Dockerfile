@@ -152,6 +152,11 @@ RUN set -eux; \
 
 COPY modprobe.sh /usr/local/bin/modprobe
 COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
+ chmod +x /usr/local/bin/modprobe/modprobe.sh
+
+ENV PATH /usr/local/bin:$PATH
+
 
 # https://github.com/docker-library/docker/pull/166
 #   dockerd-entrypoint.sh uses DOCKER_TLS_CERTDIR for auto-generating TLS certificates
