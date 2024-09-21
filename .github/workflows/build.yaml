@@ -29,7 +29,9 @@ jobs:
         run: echo "${ALIYUN_REGISTRY_PASSWORD}" | docker login --username "${ALIYUN_REGISTRY_USER}" --password-stdin "${ALIYUN_REGISTRY}"
 
       - name: Build
-        run: docker buildx build --platform linux/amd64,linux/arm64 -t "${IMAGE_NAME}:latest" .
+        run: |
+          docker buildx build --platform linux/amd64,linux/arm64 -t "${IMAGE_NAME}:latest" .
+          docker images
 
       - name: Tag
         run: docker tag "${IMAGE_NAME}:latest" "${ALIYUN_REGISTRY}/${ALIYUN_NAME_SPACE}/${IMAGE_NAME}:latest"
