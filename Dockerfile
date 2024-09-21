@@ -1,4 +1,5 @@
-FROM node:20-alpine3.20
+# FROM node:20-alpine3.20
+FROM alpine:3.20
 
 ENV NODE_VERSION 20.17.0
 # RUN echo "http://mirrors.aliyun.com/alpine/v3.20/main/" > /etc/apk/repositories && \
@@ -161,5 +162,5 @@ ENV DOCKER_TLS_CERTDIR=/certs
 RUN mkdir /certs /certs/client && chmod 1777 /certs /certs/client
 # (doing both /certs and /certs/client so that if Docker does a "copy-up" into a volume defined on /certs/client, it will "do the right thing" by default in a way that still works for rootless users)
 
-# ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["sh"]
